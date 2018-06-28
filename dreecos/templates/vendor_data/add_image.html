@@ -1,0 +1,41 @@
+
+{% extends 'vendor_data/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+    <title>Add Vendor-Dreecos</title>
+    <h3>UPLOAD IMAGE</h3>
+    <h5>ONLY JPG,JPEG,GIF ARE ACCEPTABLE</h5>
+    <div style="border-radius: 10px 10px;padding:6px;width: 262px;display: none;background: lightgray"id="div_img_container">
+    <img id="uploaded_img" width="250px"height="auto">
+    </div>
+    <form enctype="multipart/form-data" method="post" action="">
+        {% csrf_token %}
+        <input type="file"id="file_input"onchange="showFile(event)"style="display: none"name="file">
+
+<button type="button"class="btn btn-secondary"onclick="uploadFile()"style="margin: 10px"><span class="glyphicon glyphicon-plus">&nbsp;Browse</span></button>
+        <button type="submit" class="btn btn-info"style="margin: 10px">Submit</button>
+    </form>
+    <script>
+        var uploadField=document.getElementById('file_input');
+        function uploadFile()
+        {
+            uploadField.click();
+        }
+        function showFile(event) {
+            const url=URL.createObjectURL(event.target.files[0]);
+            const extn=uploadField.files.item(0).name.split(".")[1];
+            if(extn==='png'|| extn==='jpg' || extn==='jpeg')
+            {
+                const size=uploadField.files.item(0).size;
+                document.getElementById('uploaded_img').src=url;
+                document.getElementById('div_img_container').style.display="block";
+
+            }
+            else
+            {
+                alert('Invalid Image Type');
+            }
+        }
+
+    </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+
+{% extends 'vendor_data/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+    <title>Add Vendor-Dreecos</title>
+
+    <button type="submit" class="btn btn-lg btn-info"onclick="redirect()">Submit Another Response</button>
+
+    <script>
+        function redirect() {
+            window.location='/vendor_data/user/';
+        }
+    </script>
+{% endblock %}

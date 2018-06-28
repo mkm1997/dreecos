@@ -1,0 +1,53 @@
+
+{% extends 'vendor_data/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+    <title>Add Vendor-Dreecos</title>
+
+    <form method="post" action="" style="padding: 50px">
+        {% csrf_token %}
+        <div class="container-fluid"id="form_menu"></div>
+        <button id="submit" type="submit" class="btn btn-lg btn-info"style="float:right;display: none">Next-></button>
+    </form>
+    <button type="button"class="btn btn-lg btn-info"id="add_cat"onclick="add_category()">Add Category</button>
+    <script>
+        const form_id='#form_menu';
+        const btn_add_category=document.getElementById('add_cat');
+        var i=0;
+        var j=0;
+        var disabled=true;
+        function add_category()
+        {
+            $(form_id).append(
+                "<div class=\"container-fluid\"style=\"border:0.5px solid gray;padding: 10px;margin-bottom: 25px\">" +
+                "<input type=\"text\"placeholder=\"Category\"class=\"form-control\"name=\"cat"+
+                i+
+                "\"style=\"margin-bottom: 10px\"><div class=\"container-fluid\"style=\"padding:0px\"id=\"item_div"+i+"\"></div>"+
+                "<button type=\"button\"class=\"btn btn-success\"id=\"add_menu"+i+
+                "\"style=\"margin-bottom: 20px\"onclick=\"add_kvp(this.id)\">Add Item</button></div>"
+            );
+            if(disabled)
+            {
+                disabled=false;
+                document.getElementById('submit').style.display="block";
+            }
+            ++i;
+        }
+
+        function add_kvp(id)
+        {
+            var idx=id.replace("add_menu","");
+            id="#item_div"+id.replace("add_menu","");
+            $(id).append(
+                "<div class=\"row\"style=\"margin-bottom: 15px\">" +
+                "<div class=\"col-sm-6\"><input type=\"text\"class=\"form-control\"placeholder=\"Item\"style=\"margin-bottom: 3px\"name=\"item"+idx+"-"+j+"\">" +
+                "</div>" +
+                "<div class=\"col-sm-6\"><input type=\"number\"class=\"form-control\"placeholder=\"Price\"style=\"margin-bottom: 3px\"name=\"item_price"+idx+"-"+j+"\">" +
+                "</div>" +
+                "</div>"
+            );
+            ++j;
+        }
+
+    </script>
+{% endblock %}

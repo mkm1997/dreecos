@@ -1,0 +1,55 @@
+
+{% extends 'vendor_data/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+    <title>Add Vendor-Dreecos</title>
+    <h4><strong>Name</strong></h4>
+    {{data.name}}
+    <h4><strong>Phone</strong></h4>
+    {{data.phone}}
+    <h4><strong>Availability</strong></h4>
+    {{data.availability}}
+    <h4><strong>Vendor Type</strong></h4>
+    {{data.vendor_type}}
+    <h4><strong>Paytm</strong></h4>
+    {{data.paytm}}
+    <h4><strong>Availability</strong></h4>
+    {{data.availability}}
+    <h4><strong>Locations</strong></h4>
+    {% for e in data.pos_data %}
+        Location:{{e.lat}},{{e.long}}<br>
+        PIN:{{e.pin}}<br>
+        Start Time:{{e.start}}<br>
+        End Time:{{e.end}}<br><br>
+    {% endfor %}
+    <h4><strong>Ratings(ignore for vegetables sellers and ice-cream vendors)</strong></h4>
+    Hygeine:{{data.hygeine}}<br>
+    Taste:{{data.taste}}
+    <h4><strong>Menu</strong></h4>
+    <div id="p1"style="margin-left:10px "></div>
+    <script>
+        json="{{data.menu}}";
+        json=json.replace(/&#39;/g,"\"");
+        json=JSON.parse(json);
+        cat=Object.keys(json);
+        $(cat).each(function (pos,val) {
+            document.getElementById('p1').innerHTML+="<b>"+val+"</b>:<br>";
+            items=json[val];
+            $(items).each(function (pos,item) {
+                document.getElementById('p1').innerHTML+="<p style='margin-left: 10px'>&gt;&gt;"+item['item']+" for "+item['price']+"</p>";
+            })
+        })
+    </script>
+    {{data.files}}
+    <button class="btn btn-success"style="margin: 10px"onclick="save()">Save</button>
+    <button class="btn btn-danger"style="margin: 10px"onclick="discard()">Discard</button>
+    <br><br><br><br><br>
+    <script>
+        function discard() {
+            window.location="/vendor_data/user/"
+        }
+        function save() {
+            window.location="/vendor_data/save/"
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,25 @@
+
+{% extends 'vendor_data/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+    <title>Add Vendor-Dreecos</title>
+
+    <form method="post" action="" style="padding: 50px">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>{{ field.label_tag }}</h4>
+                    {% if field.help_text %}
+                        <sup>{{ field.help_text }}</sup>
+                    {% endif %}
+                    {{ field.errors }}
+                </div>
+                <div class="col-sm-12 pull-left">
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-lg btn-info">Next-></button>
+    </form>
+{% endblock %}
