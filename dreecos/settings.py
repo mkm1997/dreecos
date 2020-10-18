@@ -27,7 +27,7 @@ SECRET_KEY = 'tk^9j7w4()f9ztlgivlbgt+klghyi_319&#-tovw7$8z)6@+%c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'vendor_data_collection',
+    'djcelery',
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -101,10 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
