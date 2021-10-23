@@ -227,3 +227,25 @@ def save(request):
             )
             menu.save()
     return HttpResponseRedirect('/vendor_data/add/p5/')
+
+
+from .helper_function import make_response
+from .models import Orders
+import json
+
+# Create your views here.
+
+
+class ReceiveOrders(APIView):
+
+    def post(self,request):
+        orders_data = json.load(request.body.decode("utf-8"))
+        for order in orders_data:
+            Orders(**order)
+        return make_response("SUCCESS", {}, 'Order Received Successfully !!')
+
+
+class OrderDelivers(APIView):
+    def get(self, request):
+        orders= Orders.objects.filter().order
+
